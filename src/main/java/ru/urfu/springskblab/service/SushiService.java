@@ -3,18 +3,20 @@ package ru.urfu.springskblab.service;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class SushiService implements ProductService {
 
     @PostConstruct
     public void postConstruct() {
-        System.out.println("SushiService is created");
+        log.info("SushiService is created");
     }
 
     @PreDestroy
     public void preDestroy() {
-        System.out.println("SushiService is destroyed");
+        log.info("SushiService is destroyed");
     }
 
     @Override
