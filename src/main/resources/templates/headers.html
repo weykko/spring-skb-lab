@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заголовки запросы</title>
+</head>
+<body style="display: flex; justify-content: center;">
+<main>
+    <h1 style="text-align: center; font-family: Arial, sans-serif;">List of headers</h1>
+    <table border="1" style="font-family: Arial, sans-serif;">
+        <tr>
+            <td>Header</td>
+            <td>Value</td>
+        </tr>
+        <tr th:each="header : ${headers.keySet()}">
+            <td th:text="${header}"></td>
+            <td th:text="${headers.get(header)}"></td>
+        </tr>
+    </table>
+</main>
+</body>
+</html>
