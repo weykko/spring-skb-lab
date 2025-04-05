@@ -6,11 +6,11 @@
 </head>
 <body style="display: flex; justify-content: center;">
 <main>
-    <h1 style="text-align: center">Список заголовков</h1>
-    <table border="1" width="500px">
+    <h1 style="text-align: center; font-family: Arial, sans-serif;">List of headers</h1>
+    <table border="1" style="font-family: Arial, sans-serif;">
         <tr>
-            <td>Заголовок</td>
-            <td>Значение (я)</td>
+            <td>Header</td>
+            <td>Value</td>
         </tr>
         <tr th:each="header : ${headers.keySet()}">
             <td th:text="${header}"></td>
