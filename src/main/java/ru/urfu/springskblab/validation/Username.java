@@ -11,10 +11,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@NotNull
-@Size(min = 3, max = 24)
-@Pattern(regexp = "^[a-zA-Z]+$")
 @Constraint(validatedBy = {})
+@NotNull(message = "Username не может быть пустым")
+@Size(min = 3, max = 24, message = "Username должен быть от 3 до 24 символов")
+@Pattern(regexp = "^[a-zA-Z]+$", message = "Username должен содержать только английские буквы")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Username {
