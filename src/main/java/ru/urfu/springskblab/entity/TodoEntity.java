@@ -1,10 +1,12 @@
 package ru.urfu.springskblab.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
+@Data
 @Table(name = "todo_lists")
 public class TodoEntity {
 
@@ -15,5 +17,5 @@ public class TodoEntity {
     private String name;
 
     @OneToMany(mappedBy = "todo_lists", cascade = CascadeType.ALL)
-    private List<EventEntity> events;
+    private Set<EventEntity> events;
 }
