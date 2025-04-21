@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: spring-skb-lab
+
+config:
+  values:
+    - it
+    - is
+    - prod
+
+env:
+  variable: ${EXAMPLE_TEST:default}
