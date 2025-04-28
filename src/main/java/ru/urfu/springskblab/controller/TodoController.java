@@ -21,6 +21,16 @@ public class TodoController {
         todoService.createTodoList(todoDto);
     }
 
+    @PutMapping("/{id}")
+    public void updateTodoList(@PathVariable Long id, @RequestBody TodoDto todoDto) {
+        todoService.updateTodoList(id, todoDto);
+    }
+
+    @GetMapping("/{id}")
+    public TodoDto getTodoList(@PathVariable Long id) {
+        return todoService.getTodoList(id);
+    }
+
     @GetMapping()
     public List<TodoDto> getAllTodoLists() {
         return todoService.getAllTodoLists();
