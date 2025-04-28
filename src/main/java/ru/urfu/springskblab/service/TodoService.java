@@ -31,8 +31,10 @@ public class TodoService {
     public void createTodoList(TodoDto todoDto) {
         TodoEntity todoEntity = new TodoEntity();
         saveTodoEntity(todoDto, todoEntity);
+
         log.info("Публикация MessageSendEvent");
         applicationEventPublisher.publishEvent(new MessageSendEvent(todoEntity.getName()));
+
         log.info("Публикация DatabaseChangedEvent");
         applicationEventPublisher.publishEvent(new DatabaseChangedEvent(todoEntity.getId()));
     }
@@ -40,13 +42,15 @@ public class TodoService {
     public void updateTodoList(Long id, TodoDto todoDto) {
         TodoEntity todoEntity = getTodoEntityById(id);
         saveTodoEntity(todoDto, todoEntity);
-        // из-за отсутсвтия анноатации @Transactional событие не прослушается
+
         log.info("Публикация DatabaseChangedEvent");
+        // из-за отсутсвтия анноатации @Transactional событие не прослушается
         applicationEventPublisher.publishEvent(new DatabaseChangedEvent(todoEntity.getId()));
     }
 
     public TodoDto getTodoList(Long id) {
         TodoEntity todoEntity = getTodoEntityById(id);
+
         log.info("Публикация GetTodoEvent");
         applicationEventPublisher.publishEvent(new GetTodoEvent(id.toString()));
 
