@@ -1,19 +1,16 @@
 package ru.urfu.springskblab.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
 public class Product {
 
     private Long id;
     private Float price;
     private Date date;
 
-    public Product(Float price, Date date, Long id) {
-        this.price = price;
-        this.date = date;
-        this.id = id;
-    }
 }

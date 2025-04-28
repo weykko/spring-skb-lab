@@ -15,7 +15,7 @@ public class ProductService {
     private static Long idCounter = 0L;
 
     public ProductResponse addProduct(ProductRequest productRequest) {
-        Product product = new Product(productRequest.getPrice(), productRequest.getInfo().getDate(), idCounter++);
+        Product product = new Product(idCounter++, productRequest.getPrice(), productRequest.getInfo().getDate());
         DATABASE.add(product);
 
         return toProductResponse(product);
