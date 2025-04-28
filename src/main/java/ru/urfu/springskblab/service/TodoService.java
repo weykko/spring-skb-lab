@@ -3,6 +3,7 @@ package ru.urfu.springskblab.service;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import ru.urfu.springskblab.dto.TodoDto;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TodoService {
@@ -29,7 +31,9 @@ public class TodoService {
     public void createTodoList(TodoDto todoDto) {
         TodoEntity todoEntity = new TodoEntity();
         saveTodoEntity(todoDto, todoEntity);
+        log.info("Публикация MessageSendEvent");
         applicationEventPublisher.publishEvent(new MessageSendEvent(todoEntity.getName()));
+        log.info("Публикация DatabaseChangedEvent");
         applicationEventPublisher.publishEvent(new DatabaseChangedEvent(todoEntity.getId()));
     }
 
@@ -37,11 +41,13 @@ public class TodoService {
         TodoEntity todoEntity = getTodoEntityById(id);
         saveTodoEntity(todoDto, todoEntity);
         // из-за отсутсвтия анноатации @Transactional событие не прослушается
+        log.info("Публикация DatabaseChangedEvent");
         applicationEventPublisher.publishEvent(new DatabaseChangedEvent(todoEntity.getId()));
     }
 
     public TodoDto getTodoList(Long id) {
         TodoEntity todoEntity = getTodoEntityById(id);
+        log.info("Публикация GetTodoEvent");
         applicationEventPublisher.publishEvent(new GetTodoEvent(id.toString()));
 
         return new TodoDto(todoEntity.getName(), todoEntity.getEvents().stream()
@@ -50,6 +56,7 @@ public class TodoService {
     }
 
     public List<TodoDto> getAllTodoLists() {
+        log.info("Публикация GetTodoEvent");
         applicationEventPublisher.publishEvent(new GetTodoEvent("ALL"));
 
         return todoRepository.findAll().stream()

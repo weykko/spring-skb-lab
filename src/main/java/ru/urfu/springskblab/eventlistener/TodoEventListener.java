@@ -18,6 +18,8 @@ public class TodoEventListener {
 
     @EventListener
     public void handleMessageReceivedEvent(GetTodoEvent event) {
+        log.info("Обработка GetTodoEvent");
+
         if (Objects.equals(event.id(), "ALL")) {
             log.info("Получены все TODO листы");
         }
@@ -28,12 +30,16 @@ public class TodoEventListener {
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     public void handleDatabaseChangedEvent(DatabaseChangedEvent event) {
+        log.info("Обработка DatabaseChangedEvent");
+
         log.info("Внесены изменения в базу данных в таблице todo_lists для записи с id {}", event.id());
     }
 
     @Async
     @EventListener
     public void handleMessageSendEvent(MessageSendEvent event) throws InterruptedException {
+        log.info("Обработка MessageSendEvent");
+
         log.info("Отправка пользователю сообщение о создании нового TODO листа c именем {}", event.name());
 
         // Отправляем сообщение...
