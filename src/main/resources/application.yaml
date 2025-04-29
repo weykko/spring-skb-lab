@@ -3,6 +3,5 @@ spring:
         name: skb-lab
 
 
-rate-limit:
-    count-of-requests: 5
-    window-to-check: 30
+config:
+    max-requests: 5

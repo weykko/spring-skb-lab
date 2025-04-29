@@ -1,13 +1,13 @@
 package ru.urfu.springskblab.config;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
-@Data
+@Getter
 @Configuration
-@ConfigurationProperties(prefix = "rate-limit")
 public class RateLimitConfig {
-    private Long countOfRequests;
-    private Long windowToCheck;
+    @Value("${config.max-requests}")
+    private Long maxRequests;
+
 }
