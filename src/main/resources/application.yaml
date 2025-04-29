@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: skb-lab
+
+
+config:
+    max-requests: 5
