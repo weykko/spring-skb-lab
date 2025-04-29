@@ -28,7 +28,7 @@ public class TodoEventListener {
         }
     }
 
-    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void handleDatabaseChangedEvent(DatabaseChangedEvent event) {
         log.info("Обработка DatabaseChangedEvent");
 
