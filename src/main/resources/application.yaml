@@ -1,0 +1,8 @@
+spring:
+    application:
+        name: skb-lab
+
+
+rate-limit:
+    count-of-requests: 5
+    window-to-check: 30
